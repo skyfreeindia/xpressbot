@@ -681,10 +681,11 @@
              const selectedDuration = document.querySelector('input[name="duration-switch"]:checked').value;
 
             // Update the URLs for each button based on the selected duration
-            document.getElementById('free-url').setAttribute('onclick', `location.href='${urls[selectedDuration].free}'`);
-            document.getElementById('enterprise-url').setAttribute('onclick', `location.href='${urls[selectedDuration].enterprise}'`);
-            document.getElementById('pro-url').setAttribute('onclick', `location.href='${urls[selectedDuration].pro}'`);
-            document.getElementById('ultimate-url').setAttribute('onclick', `location.href='${urls[selectedDuration].ultimate}'`);
+	    document.getElementById('free-url').setAttribute('onclick', `window.open('${urls[selectedDuration].free}', '_blank');`);
+document.getElementById('enterprise-url').setAttribute('onclick', `window.open('${urls[selectedDuration].enterprise}', '_blank');`);
+document.getElementById('pro-url').setAttribute('onclick', `window.open('${urls[selectedDuration].pro}', '_blank');`);
+document.getElementById('ultimate-url').setAttribute('onclick', `window.open('${urls[selectedDuration].ultimate}', '_blank');`);
+
 
         
         }
