@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=1024">
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN"> <!-- Note: This may not work as expected in HTML -->
+
+    <title>Pricing Table</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+              min-width: 1024px; /* Set to your desired desktop width */
+    overflow-x: auto; /* Enable horizontal scroll if content overflows */
+
+        }
+      .container {
+    max-width: 1200px; /* Limit the width for larger screens */
+    margin: auto;
+    overflow: hidden;
+}
+      .header {
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+    justify-content: space-between; /* Add space between items */
+    padding: 10px; /* Add some padding */
+}
+      .currency-dropdown {
+    padding: 10px;
+    font-size: 16px;
+}
+      /* Styling for toggle buttons */
+.toggle-buttons {
+    display: flex;
+    margin: auto;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    overflow: hidden;
+    width: 300px;
+}
+
+.toggle-buttons label {
+    flex: 1;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.toggle-buttons input {
+    display: none; /* Hide radio buttons */
+}
+
+.toggle-buttons span {
+    padding: 10px 0;
+    background: white;
+    color: #4172f3;
+    border-radius: 0px;
+    text-align: center;
+    transition: background 0.3s, color 0.3s;
+    width: 100%;
+}
+
+.toggle-buttons input:checked + label span {
+    background: #4172f3;
+    color: white;
+}
+
+.toggle-buttons input:checked + label:nth-of-type(1) span {
+    border-radius: 20px 0 0 20px;
+}
+
+.toggle-buttons input:checked + label:nth-of-type(2) span {
+    border-radius: 0 20px 20px 0;
+}
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f1f1f1;
+        }
+        .left-align {
+            text-align: left;
+                      background-color: #f1f1f1; /* Light blue color */
+    font-weight: bold; /* Make text bold */
+
+        }
+              .left-alignfeature {
+            text-align: left;
+                        max-width: 200px; /* Set a maximum width for the Features column */
+
+			 overflow: hidden; /* Prevent overflow */
+                        white-space: nowrap; /* Prevent line breaks */
+
+
+        }
+      .price {
+    font-weight: bold; /* Makes text bold */
+    font-size: 1.2em;  /* Adjusts font size */
+}
+      
+      /* Button styles */
+.subscribe-btn {
+    background-color: white;
+    color: black; /* Initial color */
+    padding: 10px 40px; /* Increase padding for oval shape */
+    border: 2px solid #ccc; /* Green border */
+    border-radius: 30px; /* Make it oval */
+    cursor: pointer;
+    text-decoration: none;
+    margin: 5px;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+}
+
+.subscribe-btn:hover {
+    background-color: #4172f3; /* Hover blue background */
+    color: white; /* Change text to white on hover */
+    border-color: #4172f3; /* Change border color to match hover */
+}
+
+/* Feature availability styling */
+.available {
+    color: black;
+}
+
+.unavailable {
+    color: red;
+}
+      
+      
+      
+@media screen and (max-width: 1024px) {
+    body {
+        min-width: 1024px; /* Keep the desktop view */
+    }
+}
+      
+    </style>
+</head>
+<body>
+  
+  <div class="container">
+    <div class="header">
+        <div class="toggle-buttons">
+            <input type="radio" id="duration-monthly" name="duration-switch" value="monthly" checked onchange="updatePricing()">
+            <label for="duration-monthly"><span>Monthly</span></label>
+            <input type="radio" id="duration-yearly" name="duration-switch" value="yearly" onchange="updatePricing()">
+            <label for="duration-yearly"><span>Yearly (Save 20%)</span></label>
+        </div>
+        <select class="currency-dropdown" id="currency" onchange="updatePricing()">
+            <option value="INR">INR</option>
+            <option value="USD">USD</option>
+        </select>
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Features</th>
+                <th>Free</th>
+                <th>Enterprise</th>
+                <th>Pro</th>
+                <th>Ultimate</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+			<tr>
+                <td class="left-alignfeature">Price</td>
+                <td class="price" id="free-monthly" data-price="0">₹ 0</td>
+                <td class="price" id="enterprise-monthly" data-price="300">₹ 300</td>
+                <td class="price" id="pro-monthly" data-price="500">₹ 500</td>
+                <td class="price" id="ultimate-monthly" data-price="800">₹ 800</td>
+            </tr>
+            <tr>
+                <td colspan="5" class="left-align">SOLUTIONS</td>
+            </tr>
+                    <tr>
+    <td class="left-alignfeature">Channels Available</td>
+    <td class="available">
+        <i class="fab fa-whatsapp"></i>
+    </td>
+    <td class="available">
+        <i class="fab fa-whatsapp"></i>
+    </td>
+    <td class="available">
+        <i class="fab fa-facebook"></i>
+        <i class="fab fa-telegram-plane"></i>
+    </td>
+    <td class="available">
+        <i class="fab fa-whatsapp"></i>
+        <i class="fab fa-facebook"></i>
+        <i class="fab fa-instagram"></i>
+        <i class="fab fa-telegram-plane"></i>
+    </td>
+</tr>
+            <tr>
+                <td class="left-alignfeature">Connect Account</td>
+                <td>1</td>
+                <td>3</td>
+                <td>5</td>
+                <td>8</td>
+            </tr>
+            <tr>
+                <td class="left-alignfeature">ERP Solution</td>
+                <td>Free</td>
+                <td>Free</td>
+                <td>Free</td>
+                <td>Free</td>
+            </tr>
+                      <tr>
+                <td class="left-alignfeature">File Sharing</td>
+                <td>Free</td>
+                <td>Free</td>
+                <td>Free</td>
+                <td>Free</td>
+            </tr>
+            <tr>
+                <td colspan="5" class="left-align">MESSAGE CREDITS</td>
+            </tr>
+            <tr><td class="left-alignfeature">Message API Calls / Month</td>
+                <td>Upto 1,000</td>
+                <td>Upto 30,000</td>
+                <td>Upto 50,000</td>
+                <td>Upto 80,000</td>
+            </tr>
+            <tr><td class="left-alignfeature">Top Up Credits</td>
+                <td>❌</td>
+                <td>❌</td>
+                <td>❌</td>
+                <td>✔️</td>
+            </tr>
+            <tr>
+                <td colspan="5" class="left-align">CONTACTS (Subscriber Manager)</td>
+            </tr>
+            <tr><td class="left-alignfeature">Max contacts limit</td>
+                <td>Upto 1,000</td>
+                <td>Upto 30,000</td>
+                <td>Upto 50,000</td>
+                <td>Upto 50,000</td>
+            </tr>
+            <tr><td class="left-alignfeature">Labels</td>
+                <td>Unlimited</td>
+                <td>Unlimited</td>
+                <td>Unlimited</td>
+                <td>Unlimited</td>
+            </tr>
+            <tr>
+                <td colspan="5" class="left-align">WHATSAPP FEATURES</td>
+            </tr>
+            <tr><td class="left-alignfeature">Broadcast Messages (Campaign)</td>
+                <td>Unlimited</td>
+                <td>Unlimited</td>
+                <td>Unlimited</td>
+                <td>Unlimited</td>
+            </tr>
+            <tr><td class="left-alignfeature">Catalog Integration</td>
+                <td>1</td>
+                <td>3</td>
+                <td>5</td>
+                <td>Unlimited</td>
+            </tr>
+            <tr><td class="left-alignfeature">Whatsapp UPI Pay</td>
+                <td>❌</td>
+                <td>❌</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+            <tr><td class="left-alignfeature">Greeting & delay messages</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+            <tr><td class="left-alignfeature">Unsubscribe & re-subscribe system</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+            <tr><td class="left-alignfeature">Auto-Label as per Webhook Response</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+            <tr><td class="left-alignfeature">Webhook Automation</td>
+                <td>1</td>
+                <td>3</td>
+                <td>5</td>
+                <td>8</td>
+            </tr>
+             <tr><td class="left-alignfeature">HTTP API Automation</td>
+                <td>❌</td>
+                <td>❌</td>
+                <td>5</td>
+                <td>8</td>
+            </tr>
+            <tr><td class="left-alignfeature">Chat Bots (Auto-replies for triggered words)</td>
+                <td>♾️</td>
+                <td>♾️</td>
+                <td>♾️</td>
+                <td>♾️</td>
+            </tr>
+            <tr><td class="left-alignfeature">Flows (Forms in WhatsApp)</td>
+                <td>1</td>
+                <td>3</td>
+                <td>5</td>
+                <td>8</td>
+            </tr>
+            <tr><td class="left-alignfeature">Sequence (Schedule message)</td>
+                <td>1</td>
+                <td>3</td>
+                <td>5</td>
+                <td>8</td>
+            </tr>
+            <tr><td class="left-alignfeature">ChatGPT AI Reply</td>
+                <td>❌</td>
+                <td>❌</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+            <tr><td class="left-alignfeature">Location</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+          <tr><td class="left-alignfeature">See incoming messages in Inbox</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+            <tr><td class="left-alignfeature">Send replies to customers</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+            <tr><td class="left-alignfeature">Multi-agent support</td>
+                <td>❌</td>
+                <td>Upto 3 agents</td>
+                <td>Upto 5 agents</td>
+                <td>Upto 5 agents</td>
+            </tr>
+            <tr><td class="left-alignfeature">Phone number masking</td>
+                <td>❌</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+            <tr><td class="left-alignfeature">Language Translate</td>
+                <td>❌</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+            <tr>
+                <td colspan="5" class="left-align">TELEGRAM FEATURES</td>
+            </tr>
+            <tr><td class="left-alignfeature">Group Management (Campaign)</td>
+                <td>Unlimited</td>
+                <td>Unlimited</td>
+                <td>Unlimited</td>
+                <td>Unlimited</td>
+            </tr>
+            <tr><td class="left-alignfeature">Chat Bots (Auto-replies for triggered words)</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+            <tr><td class="left-alignfeature">Broadcast Messages (Campaign)</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>             <tr><td class="left-alignfeature">HTTP API Automation</td>
+                <td>❌</td>
+                <td>❌</td>
+                <td>5</td>
+                <td>8</td>
+            </tr>
+            <tr><td class="left-alignfeature">See incoming messages in Inbox</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+            <tr><td class="left-alignfeature">Send replies to customers</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+            <tr><td class="left-alignfeature">Multi-agent support</td>
+                <td>❌</td>
+                <td>Upto 3 agents</td>
+                <td>Upto 5 agents</td>
+                <td>Upto 5 agents</td>
+            </tr>
+            
+            
+            <tr>
+                <td colspan="5" class="left-align">FACEBOOK FEATURES</td>
+            </tr>
+            <tr><td class="left-alignfeature">Broadcast Messages (Campaign)</td>
+                <td>Unlimited</td>
+                <td>Unlimited</td>
+                <td>Unlimited</td>
+                <td>Unlimited</td>
+            </tr>
+                   
+            <tr><td class="left-alignfeature">Chat Bots (Auto-replies for triggered words)</td>
+                <td>♾️</td>
+                <td>♾️</td>
+                <td>♾️</td>
+                <td>♾️</td>
+            </tr>
+            <tr><td class="left-alignfeature">Greeting & delay messages</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+            <tr><td class="left-alignfeature">Unsubscribe & re-subscribe system</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+            <tr><td class="left-alignfeature">Auto-Label as per Webhook Response</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+            <tr><td class="left-alignfeature">Persistent Menu</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>             <tr><td class="left-alignfeature">HTTP API Automation</td>
+                <td>❌</td>
+                <td>❌</td>
+                <td>5</td>
+                <td>8</td>
+            </tr>
+          <tr><td class="left-alignfeature">See incoming messages in Inbox</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+            <tr><td class="left-alignfeature">Send replies to customers</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+            <tr><td class="left-alignfeature">Multi-agent support</td>
+                <td>❌</td>
+                <td>Upto 3 agents</td>
+                <td>Upto 5 agents</td>
+                <td>Upto 5 agents</td>
+            </tr>
+            <tr>
+                <td colspan="5" class="left-align">INSTAGRAM FEATURES</td>
+            </tr>
+            <tr><td class="left-alignfeature">Broadcast Messages (Campaign)</td>
+                <td>Unlimited</td>
+                <td>Unlimited</td>
+                <td>Unlimited</td>
+                <td>Unlimited</td>
+            </tr>
+            <tr><td class="left-alignfeature">Chat Bots (Auto-replies for triggered words)</td>
+                <td>♾️</td>
+                <td>♾️</td>
+                <td>♾️</td>
+                <td>♾️</td>
+            </tr>
+            <tr><td class="left-alignfeature">Greeting & delay messages</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+            <tr><td class="left-alignfeature">Unsubscribe & re-subscribe system</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+            <tr><td class="left-alignfeature">Auto-Label as per Webhook Response</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+            <tr><td class="left-alignfeature">Persistent Menu</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+                       <tr><td class="left-alignfeature">HTTP API Automation</td>
+                <td>❌</td>
+                <td>❌</td>
+                <td>5</td>
+                <td>8</td>
+            </tr>
+          <tr><td class="left-alignfeature">See incoming messages in Inbox</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+            <tr><td class="left-alignfeature">Send replies to customers</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+            <tr><td class="left-alignfeature">Multi-agent support</td>
+                <td>❌</td>
+                <td>Upto 3 agents</td>
+                <td>Upto 5 agents</td>
+                <td>Upto 5 agents</td>
+            </tr>
+          <tr>
+                <td colspan="5" class="left-align">3RD PARTY INTEGRATIONS</td>
+            </tr>
+            <tr><td class="left-alignfeature">Shopify / Wordpress</td>
+                <td>1</td>
+                <td>3</td>
+                <td>5</td>
+               
+                <td>8</td>
+            </tr>
+            <tr><td class="left-alignfeature">SMS Integration</td>
+                <td>❌</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+            <tr><td class="left-alignfeature">REST API</td>
+                <td>❌</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+            <tr>
+                <td colspan="5" class="left-align">SUPPORT</td>
+            </tr>
+            <tr><td class="left-alignfeature">Live chat support</td>
+                <td>❌</td>
+                <td>❌</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+            <tr><td class="left-alignfeature">Zoho Assist</td>
+                <td>❌</td>
+                <td>❌</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+            <tr><td colspan="5" class="left-align">ERP Solution - Free (No support)</td>
+            </tr>
+            <tr><td class="left-alignfeature">Workspace</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+            </tr>
+            <tr><td class="left-alignfeature">Agents</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+            </tr>
+            <tr><td class="left-alignfeature">HRM</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+            <tr><td class="left-alignfeature">CRM</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+            <tr><td class="left-alignfeature">Accounting</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+                <td>✔️</td>
+            </tr>
+            <tr><td class="left-alignfeature">Webhook Notification</td>
+                <td colspan="4" >Coming Soon</td>
+
+            </tr>
+          <tr>
+                <td class="left-alignfeature">Buy Now</td>
+                    <td><button class="subscribe-btn" id="free-url">Sign Up</button></td>
+                    <td><button class="subscribe-btn" id="enterprise-url">Sign Up</button></td>
+                    <td><button class="subscribe-btn" id="pro-url">Sign Up</button></td>
+                    <td><button class="subscribe-btn" id="ultimate-url">Sign Up</button></td>
+            </tr>
+        </tbody>
+    </table></div>
+  </body><script> async function fetchExchangeRate(currency) {
+            const response = await fetch(`https://api.exchangerate-api.com/v4/latest/INR`);
+            const data = await response.json();
+            return data.rates[currency];
+        }
+
+        function formatPrice(price) {
+            return Math.round(price);
+        }
+
+        async function updatePricing() {
+            const duration = document.querySelector('input[name="duration-switch"]:checked').value;
+            const currency = document.getElementById("currency").value;
+
+            const priceMultiplier = duration === "monthly" ? 1 : 12 * 0.8; // 20% discount for yearly
+
+            const basePrices = {
+                free: 0,
+                enterprise: 300,
+                pro: 500,
+                ultimate: 800
+            };
+
+            let conversionRate = 1;
+            if (currency !== "INR") {
+                conversionRate = await fetchExchangeRate(currency);
+            }
+
+            const currencySymbol = currency === "INR" ? "₹" : "$";
+
+            document.getElementById("free-monthly").innerText = `${currencySymbol} ${formatPrice(basePrices.free * priceMultiplier * conversionRate)}`;
+            document.getElementById("enterprise-monthly").innerText = `${currencySymbol} ${formatPrice(basePrices.enterprise * priceMultiplier * conversionRate)}`;
+            document.getElementById("pro-monthly").innerText = `${currencySymbol} ${formatPrice(basePrices.pro * priceMultiplier * conversionRate)}`;
+            document.getElementById("ultimate-monthly").innerText = `${currencySymbol} ${formatPrice(basePrices.ultimate * priceMultiplier * conversionRate)}`;
+        
+            const urls = {
+                monthly: {
+                    free: 'https://xpressbot.org/users/register',
+                    enterprise: 'https://xpressbot.org/users/?add-to-cart=7649',
+                    pro: 'https://xpressbot.org/users/?add-to-cart=13779',
+                    ultimate: 'https://xpressbot.org/users/?add-to-cart=13774',
+                },
+                yearly: {
+                    free: 'https://xpressbot.org/users/register',
+                    enterprise: 'https://xpressbot.org/users/?add-to-cart=7650',
+                    pro: 'https://xpressbot.org/users/?add-to-cart=13781',
+                    ultimate: 'https://xpressbot.org/users/?add-to-cart=13774',
+                }
+            };
+
+             const selectedDuration = document.querySelector('input[name="duration-switch"]:checked').value;
+
+            // Update the URLs for each button based on the selected duration
+            document.getElementById('free-url').setAttribute('onclick', `location.href='${urls[selectedDuration].free}'`);
+            document.getElementById('enterprise-url').setAttribute('onclick', `location.href='${urls[selectedDuration].enterprise}'`);
+            document.getElementById('pro-url').setAttribute('onclick', `location.href='${urls[selectedDuration].pro}'`);
+            document.getElementById('ultimate-url').setAttribute('onclick', `location.href='${urls[selectedDuration].ultimate}'`);
+
+        
+        }
+
+        window.onload = updatePricing;
+
+  </script>
+</html>
