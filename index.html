@@ -10,133 +10,155 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-              min-width: 1024px; /* Set to your desired desktop width */
-    overflow-x: auto; /* Enable horizontal scroll if content overflows */
+/* Basic body styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    min-width: 1024px; /* Ensures a minimum desktop width */
+    overflow-x: auto; /* Allows horizontal scrolling if content overflows */
+}
 
-        }
-      .container {
-    max-width: 1200px; /* Limit the width for larger screens */
+/* Container styling */
+.container {
+    max-width: 1200px;
     margin: auto;
     overflow: hidden;
 }
-      .header {
+
+/* Header and toggle button styles */
+.header {
     display: flex;
-    align-items: center; /* Align items vertically in the center */
-    justify-content: space-between; /* Add space between items */
-    padding: 10px; /* Add some padding */
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
 }
-        .currency-dropdown {
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 10px; /* Rounded corners */
-            background-color: #ffffff; /* Light background color */
-            color: #333; /* Text color */
-            transition: border 0.3s; /* Smooth transition for border */
-        }
-        .currency-dropdown:hover {
-            border-color: #4172f3; /* Change border color on hover */
-        }
-	    
-      /* Styling for toggle buttons */
+
+/* Currency dropdown styling */
+.currency-dropdown {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #ffffff;
+    color: #333;
+    transition: border 0.3s;
+}
+
+.currency-dropdown:hover {
+    border-color: #4172f3; /* Change border color on hover */
+}
+
+/* Toggle button group styling */
 .toggle-buttons {
     display: flex;
+    width: 100%;
+    max-width: 600px; /* Adjust as needed for your layout */
     margin: auto;
     border: 1px solid #ccc;
-    border-radius: 20px;
+    border-radius: 30px; /* Curved edges around the entire toggle */
     overflow: hidden;
-    width: 300px;
 }
 
+/* Hide radio buttons */
+.toggle-buttons input {
+    display: none;
+}
+
+/* Default label styling */
 .toggle-buttons label {
     flex: 1;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-.toggle-buttons input {
-    display: none; /* Hide radio buttons */
-}
-
-.toggle-buttons span {
     padding: 10px 0;
     background: white;
-    color: #4172f3;
-    border-radius: 0px;
-    text-align: center;
+    color: #4172f3; /* Default color */
+    font-weight: bold;
+    font-size: 16px;
     transition: background 0.3s, color 0.3s;
-    width: 100%;
 }
 
-.toggle-buttons input:checked + label span {
+/* Hover effect for labels */
+.toggle-buttons label:hover {
+    background-color: #e6f0ff;
+}
+
+/* Styling for the selected (checked) options */
+#duration-monthly:checked + label[for="duration-monthly"] {
     background: #4172f3;
     color: white;
+    border-radius: 30px 0 0 30px; /* Rounded left side for Monthly */
 }
 
-.toggle-buttons input:checked + label:nth-of-type(1) span {
-    border-radius: 20px 0 0 20px;
+#duration-quarterly:checked + label[for="duration-quarterly"] {
+    background: #4172f3;
+    color: white;
+    border-radius: 0; /* Rectangle for Quarterly */
 }
 
-.toggle-buttons input:checked + label:nth-of-type(2) span {
-    border-radius: 0 20px 20px 0;
+#duration-yearly:checked + label[for="duration-yearly"] {
+    background: #4172f3;
+    color: white;
+    border-radius: 0 30px 30px 0; /* Rounded right side for Yearly */
 }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: #f1f1f1;
-        }
-        .left-align {
-            text-align: left;
-                      background-color: #f1f1f1; /* Light blue color */
-    font-weight: bold; /* Make text bold */
 
-        }
-              .left-alignfeature {
-            text-align: left;
-
-			 overflow: hidden; /* Prevent overflow */
-                        white-space: nowrap; /* Prevent line breaks */
-
-
-        }
-      .price {
-    font-weight: bold; /* Makes text bold */
-    font-size: 1.2em;  /* Adjusts font size */
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
 }
-      
-      /* Button styles */
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background-color: #f1f1f1;
+}
+
+/* Table row styles for features */
+.left-align {
+    text-align: left;
+    background-color: #f1f1f1;
+    font-weight: bold;
+}
+
+.left-alignfeature {
+    text-align: left;
+    overflow: hidden;
+    white-space: nowrap; /* Prevent line breaks */
+}
+
+/* Price styling */
+.price {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+/* Subscription button styles */
 .subscribe-btn {
     background-color: white;
-    color: black; /* Initial color */
-    padding: 10px 40px; /* Increase padding for oval shape */
-    border: 2px solid #ccc; /* Green border */
-    border-radius: 30px; /* Make it oval */
+    color: black;
+    padding: 10px 40px;
+    border: 2px solid #ccc;
+    border-radius: 30px;
     cursor: pointer;
     text-decoration: none;
     margin: 5px;
-    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .subscribe-btn:hover {
-    background-color: #4172f3; /* Hover blue background */
-    color: white; /* Change text to white on hover */
-    border-color: #4172f3; /* Change border color to match hover */
+    background-color: #4172f3;
+    color: white;
+    border-color: #4172f3;
 }
 
-/* Feature availability styling */
+/* Feature availability colors */
 .available {
     color: black;
 }
@@ -144,16 +166,10 @@
 .unavailable {
     color: red;
 }
-      
-      
-      
-@media screen and (max-width: 1024px) {
-    body {
-        min-width: 1024px; /* Keep the desktop view */
-    }
-}
+
+/* Popular label style */
 .popular-label {
-    background-color: #f39c12; /* Orange background */
+    background-color: #f39c12;
     color: white;
     font-size: 12px;
     font-weight: bold;
@@ -163,6 +179,14 @@
     margin-bottom: 5px;
     display: inline-block;
 }
+
+/* Minimum screen width to prevent layout issues */
+@media screen and (max-width: 1024px) {
+    body {
+        min-width: 1024px;
+    }
+}
+
 
       
     </style>
@@ -174,6 +198,8 @@
         <div class="toggle-buttons">
             <input type="radio" id="duration-monthly" name="duration-switch" value="monthly" checked onchange="updatePricing()">
             <label for="duration-monthly"><span>Monthly</span></label>
+            <input type="radio" id="duration-quarterly" name="duration-switch" value="quarterly" onchange="updatePricing()">
+            <label for="duration-quarterly"><span>Quarterly (Save 10%)</span></label> <!-- Quarterly option added -->
             <input type="radio" id="duration-yearly" name="duration-switch" value="yearly" onchange="updatePricing()">
             <label for="duration-yearly"><span>Yearly (Save 20%)</span></label>
         </div>
@@ -667,57 +693,64 @@
             return Math.round(price);
         }
 
-        async function updatePricing() {
-            const duration = document.querySelector('input[name="duration-switch"]:checked').value;
-            const currency = document.getElementById("currency").value;
+async function updatePricing() {
+    const duration = document.querySelector('input[name="duration-switch"]:checked').value;
+    const currency = document.getElementById("currency").value;
 
-            const priceMultiplier = duration === "monthly" ? 1 : 12 * 0.8; // 20% discount for yearly
+    let priceMultiplier;
+    if (duration === "monthly") {
+        priceMultiplier = 1;
+    } else if (duration === "quarterly") {
+        priceMultiplier = 3 * 0.9; // Quarterly with 10% discount
+    } else if (duration === "yearly") {
+        priceMultiplier = 12 * 0.8; // Yearly with 20% discount
+    }
 
-            const basePrices = {
-                free: 0,
-                enterprise: 300,
-                pro: 500,
-                ultimate: 800
-            };
+    const basePrices = {
+        free: 0,
+        enterprise: 300,
+        pro: 500,
+        ultimate: 800
+    };
 
-            let conversionRate = 1;
-            if (currency !== "INR") {
-                conversionRate = await fetchExchangeRate(currency);
-            }
+    let conversionRate = 1;
+    if (currency !== "INR") {
+        conversionRate = await fetchExchangeRate(currency);
+    }
 
-            const currencySymbol = currency === "INR" ? "₹" : "$";
+    const currencySymbol = currency === "INR" ? "₹" : "$";
 
-            document.getElementById("free-monthly").innerText = `${currencySymbol} ${formatPrice(basePrices.free * priceMultiplier * conversionRate)}`;
-            document.getElementById("enterprise-monthly").innerText = `${currencySymbol} ${formatPrice(basePrices.enterprise * priceMultiplier * conversionRate)}`;
-            document.getElementById("pro-monthly").innerText = `${currencySymbol} ${formatPrice(basePrices.pro * priceMultiplier * conversionRate)}`;
-            document.getElementById("ultimate-monthly").innerText = `${currencySymbol} ${formatPrice(basePrices.ultimate * priceMultiplier * conversionRate)}`;
-        
-            const urls = {
-                monthly: {
-                    free: 'https://xpressbot.org/users/register',
-                    enterprise: 'https://xpressbot.org/users/?add-to-cart=7649',
-                    pro: 'https://xpressbot.org/users/?add-to-cart=13779',
-                    ultimate: 'https://xpressbot.org/users/?add-to-cart=7594',
-                },
-                yearly: {
-                    free: 'https://xpressbot.org/users/register',
-                    enterprise: 'https://xpressbot.org/users/?add-to-cart=7650',
-                    pro: 'https://xpressbot.org/users/?add-to-cart=13781',
-                    ultimate: 'https://xpressbot.org/users/?add-to-cart=7595',
-                }
-            };
+    document.getElementById("free-monthly").innerText = `${currencySymbol} ${formatPrice(basePrices.free * priceMultiplier * conversionRate)}`;
+    document.getElementById("enterprise-monthly").innerText = `${currencySymbol} ${formatPrice(basePrices.enterprise * priceMultiplier * conversionRate)}`;
+    document.getElementById("pro-monthly").innerText = `${currencySymbol} ${formatPrice(basePrices.pro * priceMultiplier * conversionRate)}`;
+    document.getElementById("ultimate-monthly").innerText = `${currencySymbol} ${formatPrice(basePrices.ultimate * priceMultiplier * conversionRate)}`;
 
-             const selectedDuration = document.querySelector('input[name="duration-switch"]:checked').value;
-
-            // Update the URLs for each button based on the selected duration
-	    document.getElementById('free-url').setAttribute('onclick', `window.open('${urls[selectedDuration].free}', '_blank');`);
-document.getElementById('enterprise-url').setAttribute('onclick', `window.open('${urls[selectedDuration].enterprise}', '_blank');`);
-document.getElementById('pro-url').setAttribute('onclick', `window.open('${urls[selectedDuration].pro}', '_blank');`);
-document.getElementById('ultimate-url').setAttribute('onclick', `window.open('${urls[selectedDuration].ultimate}', '_blank');`);
-
-
-        
+    const urls = {
+        monthly: {
+            free: 'https://xpressbot.org/users/register',
+            enterprise: 'https://xpressbot.org/users/?add-to-cart=7649',
+            pro: 'https://xpressbot.org/users/?add-to-cart=13779',
+            ultimate: 'https://xpressbot.org/users/?add-to-cart=7594',
+        },
+        quarterly: {
+            free: 'https://xpressbot.org/users/register',
+            enterprise: 'https://xpressbot.org/users/?add-to-cart=7347', // Replace with the actual link
+            pro: 'https://xpressbot.org/users/?add-to-cart=13780',
+            ultimate: 'https://xpressbot.org/users/?add-to-cart=7593',
+        },
+        yearly: {
+            free: 'https://xpressbot.org/users/register',
+            enterprise: 'https://xpressbot.org/users/?add-to-cart=7650',
+            pro: 'https://xpressbot.org/users/?add-to-cart=13781',
+            ultimate: 'https://xpressbot.org/users/?add-to-cart=7595',
         }
+    };
+
+    document.getElementById('free-url').setAttribute('onclick', `window.open('${urls[duration].free}', '_blank');`);
+    document.getElementById('enterprise-url').setAttribute('onclick', `window.open('${urls[duration].enterprise}', '_blank');`);
+    document.getElementById('pro-url').setAttribute('onclick', `window.open('${urls[duration].pro}', '_blank');`);
+    document.getElementById('ultimate-url').setAttribute('onclick', `window.open('${urls[duration].ultimate}', '_blank');`);
+}
 
         window.onload = updatePricing;
  // Your existing Tawk.to script
