@@ -721,7 +721,15 @@ async function updatePricing() {
         conversionRate = await fetchExchangeRate(currency);
     }
 
-    const currencySymbol = currency === "INR" ? "₹" : "$";
+const currencySymbols = {
+    INR: "₹",
+    USD: "$",
+    MYR: "RM",
+    SGD: "S$",
+    EUR: "€"
+};
+
+const currencySymbol = currencySymbols[currency] || "$"; // Default to "$" if the currency is not found
 
     document.getElementById("free-monthly").innerText = `${currencySymbol} ${formatPrice(basePrices.free * priceMultiplier * conversionRate)}`;
     document.getElementById("enterprise-monthly").innerText = `${currencySymbol} ${formatPrice(basePrices.enterprise * priceMultiplier * conversionRate)}`;
