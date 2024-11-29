@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feature Comparison Nested Accordions</title>
+    <title>Mobile-Friendly Nested Accordions</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -19,7 +19,7 @@
         }
 
         .accordion {
-            border: 2px solid #ccc;
+            border: 2px solid #ccc; /* Border around the entire accordion */
             border-radius: 5px;
             margin-bottom: 10px;
             overflow: hidden;
@@ -41,8 +41,7 @@
 
         .accordion-content {
             display: none;
-            padding: 10px;
-            background-color: #fff;
+            padding: 0;
         }
 
         .accordion.open .accordion-content {
@@ -59,24 +58,47 @@
             transform: rotate(90deg);
         }
 
+        /* Table Styling */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 10px;
+            margin-top: 0;
         }
 
-        table th, table td {
+        /* Column borders that touch accordion's left and right border */
+        table td {
             padding: 8px;
             text-align: left;
-            border: 1px solid #ddd;
+            border-left: 1px solid #ddd;  /* Column left border */
+            border-right: 1px solid #ddd; /* Column right border */
+            width: 50%; /* Equal column widths */
         }
 
-        table th {
-            background-color: #f7f7f7;
+        /* Remove the first left border (it touches the accordion) */
+        table td:first-child {
+            border-left: none;
         }
 
+        /* Remove the last right border (it touches the accordion) */
+        table td:last-child {
+            border-right: none;
+        }
+
+        /* Row borders */
+        table tr {
+            border-bottom: 1px solid #ddd; /* Border for rows */
+			            border-top: 1px solid #ddd; /* Border for rows */
+
+        }
+
+        /* Remove bottom border for the last row */
+        table tr:last-child {
+            border-bottom: none;
+        }
+
+        /* Responsive adjustments */
         @media (max-width: 768px) {
-            table th, table td {
+            .accordion-content {
                 font-size: 14px;
             }
         }
@@ -84,174 +106,111 @@
 </head>
 <body>
 
-<div class="main-heading">Feature Comparison</div>
+    <!-- SOLUTIONS -->
+    <div class="main-heading">SOLUTIONS</div>
+    <div class="accordion open">
+        <div class="accordion-heading">
+            Price
+            <span class="arrow">▶</span>
+        </div>
+        <div class="accordion-content">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Free</td>
+                        <td>€ 0</td>
+                    </tr>
+                    <tr>
+                        <td>Enterprise</td>
+                        <td>€ 3</td>
+                    </tr>
+                    <tr>
+                        <td>Pro</td>
+                        <td>€ 6</td>
+                    </tr>
+                    <tr>
+                        <td>Ultimate</td>
+                        <td>€ 9</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-<div class="accordion">
-    <div class="accordion-heading">
-        Pricing and Subscription
-        <span class="arrow">▶</span>
+    <div class="accordion">
+        <div class="accordion-heading">
+            Buy Now
+            <span class="arrow">▶</span>
+        </div>
+        <div class="accordion-content">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Free</td>
+                        <td><a href="https://example.com/free">Buy Now</a></td>
+                    </tr>
+                    <tr>
+                        <td>Enterprise</td>
+                        <td><a href="https://example.com/enterprise">Buy Now</a></td>
+                    </tr>
+                    <tr>
+                        <td>Pro</td>
+                        <td><a href="https://example.com/pro">Buy Now</a></td>
+                    </tr>
+                    <tr>
+                        <td>Ultimate</td>
+                        <td><a href="https://example.com/ultimate">Buy Now</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="accordion-content">
-        <table>
-            <thead>
-                <tr>
-                    <th>Feature</th>
-                    <th>Free</th>
-                    <th>Enterprise</th>
-                    <th>Pro</th>
-                    <th>Ultimate</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Price</td>
-                    <td>$0</td>
-                    <td>$4</td>
-                    <td>$6</td>
-                    <td>$9</td>
-                </tr>
-                <tr>
-                    <td>Buy Now</td>
-                    <td>Sign Up</td>
-                    <td>Subscribe</td>
-                    <td>Subscribe</td>
-                    <td>Subscribe</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
 
-<div class="accordion">
-    <div class="accordion-heading">
-        Solutions
-        <span class="arrow">▶</span>
+    <!-- MESSAGE CREDITS -->
+    <div class="main-heading">MESSAGE CREDITS</div>
+    <div class="accordion">
+        <div class="accordion-heading">
+            Monthly Credit Allocation
+            <span class="arrow">▶</span>
+        </div>
+        <div class="accordion-content">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Free</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>Enterprise</td>
+                        <td>500</td>
+                    </tr>
+                    <tr>
+                        <td>Pro</td>
+                        <td>1,000</td>
+                    </tr>
+                    <tr>
+                        <td>Ultimate</td>
+                        <td>5,000</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="accordion-content">
-        <table>
-            <thead>
-                <tr>
-                    <th>Feature</th>
-                    <th>Free</th>
-                    <th>Enterprise</th>
-                    <th>Pro</th>
-                    <th>Ultimate</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Connect Account</td>
-                    <td>1</td>
-                    <td>3</td>
-                    <td>5</td>
-                    <td>5</td>
-                </tr>
-                <tr>
-                    <td>ERP Solution</td>
-                    <td>Free</td>
-                    <td>Free</td>
-                    <td>Free</td>
-                    <td>Free</td>
-                </tr>
-                <tr>
-                    <td>File Sharing</td>
-                    <td>Free</td>
-                    <td>Free</td>
-                    <td>Free</td>
-                    <td>Free</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
 
-<div class="accordion">
-    <div class="accordion-heading">
-        WhatsApp Features
-        <span class="arrow">▶</span>
-    </div>
-    <div class="accordion-content">
-        <table>
-            <thead>
-                <tr>
-                    <th>Feature</th>
-                    <th>Free</th>
-                    <th>Enterprise</th>
-                    <th>Pro</th>
-                    <th>Ultimate</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Broadcast Messages</td>
-                    <td>Unlimited</td>
-                    <td>Unlimited</td>
-                    <td>Unlimited</td>
-                    <td>Unlimited</td>
-                </tr>
-                <tr>
-                    <td>Catalog Integration</td>
-                    <td>1</td>
-                    <td>3</td>
-                    <td>5</td>
-                    <td>5</td>
-                </tr>
-                <tr>
-                    <td>Chat Bots</td>
-                    <td>♾️</td>
-                    <td>♾️</td>
-                    <td>♾️</td>
-                    <td>♾️</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<div class="accordion">
-    <div class="accordion-heading">
-        Support
-        <span class="arrow">▶</span>
-    </div>
-    <div class="accordion-content">
-        <table>
-            <thead>
-                <tr>
-                    <th>Feature</th>
-                    <th>Free</th>
-                    <th>Enterprise</th>
-                    <th>Pro</th>
-                    <th>Ultimate</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Live Chat Support</td>
-                    <td>❌</td>
-                    <td>❌</td>
-                    <td>✔️</td>
-                    <td>✔️</td>
-                </tr>
-                <tr>
-                    <td>Zoho Assist</td>
-                    <td>❌</td>
-                    <td>❌</td>
-                    <td>✔️</td>
-                    <td>✔️</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<script>
-    document.querySelectorAll('.accordion-heading').forEach(heading => {
-        heading.addEventListener('click', () => {
-            const accordion = heading.parentElement;
-            accordion.classList.toggle('open');
+    <script>
+        // Add event listeners to accordion headings
+        document.querySelectorAll('.accordion-heading').forEach(heading => {
+            heading.addEventListener('click', function () {
+                const accordion = this.parentElement;
+                accordion.classList.toggle('open'); // Toggle the "open" class
+            });
         });
-    });
-</script>
+
+        // Include your index.html script logic here
+        async function fetchCurrencyRates() {
+            console.log('Dynamic currency logic will be added here.');
+        }
+    </script>
 
 </body>
 </html>
