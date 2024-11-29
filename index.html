@@ -815,12 +815,15 @@ document.addEventListener('DOMContentLoaded', async function () {
     await setDefaultCurrency(); // Ensure currency is set before updating pricing
 });
 
-    window.addEventListener("message", (event) => {
-        if (event.data.iframeHeight) {
-            const iframe = document.getElementById("pricingFrame");
-            iframe.style.height = event.data.iframeHeight + "px";
-        }
-    });
+
+    function sendHeightToParent() {
+        const height = document.body.scrollHeight; // Measure the height of the content
+        window.parent.postMessage({ iframeHeight: height }, "http://xpressbot.org"); // Replace with your parent page URL
+    }
+
+    window.onload = sendHeightToParent; // Send height after the page loads
+    window.onresize = sendHeightToParent; // Resend height if the iframe content changes
+
 
 
 
