@@ -686,17 +686,65 @@ th {
 
         </tbody>
     </table></div>
-  </body><script> async function fetchExchangeRate(currency) {
+  </body><script>
+  
+async function setDefaultCurrency() {
+    try {
+        const response = await fetch("https://ipapi.co/json/");
+        const data = await response.json();
+        const country = data.country;
+
+        let defaultCurrency;
+        switch (country) {
+            case "IN": defaultCurrency = "INR"; break;
+            case "SG": defaultCurrency = "SGD"; break;
+            case "MY": defaultCurrency = "MYR"; break;
+            case "DE":
+            case "FR":
+            case "ES": // You can add more countries here if needed
+                defaultCurrency = "EUR";
+                break;
+            default:
+                defaultCurrency = "USD"; // Default to USD if no match
+        }
+
+        // Set the default currency in the dropdown
+        const currencyDropdown = document.getElementById("currency");
+        currencyDropdown.value = defaultCurrency;  // Set default currency based on location
+
+        // Update the pricing for the default currency
+        await updatePricing();  // Ensure pricing is updated after setting the currency
+
+    } catch (error) {
+        console.error("Error fetching user location:", error);
+		document.getElementById("currency").value = "INR"; // Fallback to USD if error occurs
+        await updatePricing(); // Update pricing with fallback
+
+    }
+}
+
+
+
+
+    // Fetch exchange rate for the selected currency
+    async function fetchExchangeRate(currency) {
+        try {
             const response = await fetch(`https://api.exchangerate-api.com/v4/latest/INR`);
             const data = await response.json();
-            return data.rates[currency];
+            return data.rates[currency] || 1; // Return 1 if currency is not found
+        } catch (error) {
+            console.error("Error fetching exchange rates:", error);
+            return 1; // Fallback to 1 if API fails
         }
+    }
 
-        function formatPrice(price) {
-            return Math.round(price);
-        }
+    // Format price to nearest integer
+    function formatPrice(price) {
+        return Math.round(price);
+    }
 
-async function updatePricing() {
+    // Update pricing based on selected duration and currency
+ async function updatePricing() {
     const duration = document.querySelector('input[name="duration-switch"]:checked').value;
     const currency = document.getElementById("currency").value;
 
@@ -721,15 +769,15 @@ async function updatePricing() {
         conversionRate = await fetchExchangeRate(currency);
     }
 
-const currencySymbols = {
-    INR: "₹",
-    USD: "$",
-    MYR: "RM",
-    SGD: "S$",
-    EUR: "€"
-};
+    const currencySymbols = {
+        INR: "₹",
+        USD: "$",
+        MYR: "RM",
+        SGD: "S$",
+        EUR: "€"
+    };
 
-const currencySymbol = currencySymbols[currency] || "$"; // Default to "$" if the currency is not found
+    const currencySymbol = currencySymbols[currency] || "$"; // Default to "$" if not found
 
     document.getElementById("free-monthly").innerText = `${currencySymbol} ${formatPrice(basePrices.free * priceMultiplier * conversionRate)}`;
     document.getElementById("enterprise-monthly").innerText = `${currencySymbol} ${formatPrice(basePrices.enterprise * priceMultiplier * conversionRate)}`;
@@ -745,7 +793,7 @@ const currencySymbol = currencySymbols[currency] || "$"; // Default to "$" if th
         },
         quarterly: {
             free: 'https://xpressbot.org/users/register',
-            enterprise: 'https://xpressbot.org/users/?add-to-cart=7347', // Replace with the actual link
+            enterprise: 'https://xpressbot.org/users/?add-to-cart=7347',
             pro: 'https://xpressbot.org/users/?add-to-cart=13780',
             ultimate: 'https://xpressbot.org/users/?add-to-cart=7593',
         },
@@ -763,16 +811,22 @@ const currencySymbol = currencySymbols[currency] || "$"; // Default to "$" if th
     document.getElementById('ultimate-url').setAttribute('onclick', `window.open('${urls[duration].ultimate}', '_blank');`);
 }
 
-        window.onload = updatePricing;
- // Your existing Tawk.to script
- var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-        (function(){
-            var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-            s1.async=true;
-            s1.src='https://embed.tawk.to/65305618f2439e1631e5e9b1/1hd2d0k20';
-            s1.charset='UTF-8';
-            s1.setAttribute('crossorigin','*');
-            s0.parentNode.insertBefore(s1,s0);
-        })();
-  </script>
+document.addEventListener('DOMContentLoaded', async function () {
+    await setDefaultCurrency(); // Ensure currency is set before updating pricing
+});
+
+
+
+    // Tawk.to script
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/65305618f2439e1631e5e9b1/1hd2d0k20';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
+    })();
+</script>
+
 </html>
