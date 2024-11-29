@@ -116,6 +116,11 @@
             ultimate: 'https://xpressbot.org/users/?add-to-cart=7595',
         }
     }
+    
+document.getElementById('free-url').setAttribute('onclick', `window.open('${urls[duration].free}', '_blank');`);
+    document.getElementById('enterprise-url').setAttribute('onclick', `window.open('${urls[duration].enterprise}', '_blank');`);
+    document.getElementById('pro-url').setAttribute('onclick', `window.open('${urls[duration].pro}', '_blank');`);
+    document.getElementById('ultimate-url').setAttribute('onclick', `window.open('${urls[duration].ultimate}', '_blank');`);
 
     // Initialize on page load
     window.onload = async function () {
