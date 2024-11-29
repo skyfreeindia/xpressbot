@@ -716,8 +716,9 @@ async function setDefaultCurrency() {
         await updatePricing();  // Ensure pricing is updated after setting the currency
 
     } catch (error) {
-        console.error("Error fetching user location:", error);
-    }
+		console.error("Error fetching user location:", error);
+                document.getElementById("currency").value = "INR"; // Fallback to USD if error occurs
+                updatePricing(); // Update pricing with fallback    }
 }
 
 
