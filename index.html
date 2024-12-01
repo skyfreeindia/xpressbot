@@ -816,13 +816,12 @@ document.addEventListener('DOMContentLoaded', async function () {
 });
 
 
-    function sendHeightToParent() {
-        const height = document.body.scrollHeight; // Measure the height of the content
-        window.parent.postMessage({ iframeHeight: height }, "http://xpressbot.org"); // Replace with your parent page URL
-    }
-
-    window.onload = sendHeightToParent; // Send height after the page loads
-    window.onresize = sendHeightToParent; // Resend height if the iframe content changes
+window.addEventListener('DOMContentLoaded', function () {
+    // Calculate the height of the content (you can use scrollHeight or offsetHeight)
+    var height = document.documentElement.scrollHeight;
+    // Send the height to the parent window (WordPress)
+    window.parent.postMessage(height, "*");
+});
 
 
 
