@@ -176,6 +176,25 @@ th {
     display: inline-block;
 }
 
+/* For screens smaller than 1024px */
+@media screen and (max-width: 1024px) {
+    body {
+        width: 100%; /* Set width to 100% of the screen */
+        min-width: unset; /* Remove any fixed minimum width */
+        overflow-x: hidden; /* Prevent horizontal scrolling */
+    }
+    
+    /* Adjust any specific elements for better scaling */
+    .container {
+        padding: 10px; /* Add padding to ensure content doesn't touch the edges */
+        box-sizing: border-box; /* Include padding and border in the width calculation */
+    }
+    
+    iframe {
+        width: 100%; /* Make iframe responsive */
+        height: auto; /* Adjust height dynamically */
+    }
+}
 
 
 
