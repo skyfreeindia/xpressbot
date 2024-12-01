@@ -819,6 +819,10 @@ document.addEventListener('DOMContentLoaded', async function () {
 window.addEventListener('DOMContentLoaded', function () {
     // Calculate the height of the content (you can use scrollHeight or offsetHeight)
     var height = document.documentElement.scrollHeight;
+    
+    // Log the height to check if it’s correct
+    console.log("Iframe content height: " + height);
+    
     // Send the height to the parent window (WordPress)
     window.parent.postMessage(height, "*");
 });
